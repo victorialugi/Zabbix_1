@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Параметры
+SRC="$HOME/"
+DEST="/tmp/backup/"
+LOGFILE="/var/log/backup_home.log"
+
+# Создание директории назначения при необходимости
+mkdir -p "$DEST"
+
+# Выполнение зеркального резервного копирования
+rsync -a --delete "$SRC" "$DEST" >> "$LOGFILE" 2>&1
+
+# Проверка статуса завершения и логгирование
+if [ $? -eq 0 ]; then
+    logger "Backup completed successfully"
+    echo "$(date): Backup completed successfully" >> "$LOGFILE"
+else
+    logger "Backup failed"
+    echo "$(date): Backup failed" >> "$LOGFILE"
+fi
+
+chmod +x ~/backup_home.sh
+
+crontab -e
+
+0 2 * * * /home/USERNAME/backup_home.sh
+
+/home/USERNAME/backup_home.sh
+
+tail /var/log/backup_home.log
