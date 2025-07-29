@@ -59,59 +59,54 @@ systemctl enable zabbix-server zabbix-agent apache2
 6. 
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+## Commands Used
+
+# On zabbix-vm (Zabbix Server)
+sudo -s
+wget https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.4+ubuntu24.04_all.deb
+dpkg -i zabbix-release_latest_7.4+ubuntu24.04_all.deb
+apt update
+apt install zabbix-server-pgsql zabbix-frontend-php php8.3-pgsql zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+sudo -u postgres createuser --pwprompt zabbix
+sudo -u postgres createdb -O zabbix zabbix
+wget https://www.zabbix.com/downloads/7.4.0/zabbix-7.4.0.tar.gz
+tar -xzf zabbix-7.4.0.tar.gz
+cd zabbix-7.4.0/database/postgresql
+scp -i /home/victoria_luginina/.ssh/id_rsa /home/victoria_luginina/Downloads/zabbix-7.4.0.tar.gz ubuntu@84.201.178.123
+sudo -u zabbix psql -d zabbix -f schema.sql
+sudo -u postgres psql
+ALTER USER zabbix WITH PASSWORD ******;
+\q
+nano /etc/zabbix/zabbix_server.conf
+# DBName=zabbix
+# DBUser=zabbix
+# DBPassword=*****
+systemctl restart zabbix-server zabbix-agent apache2
+systemctl enable zabbix-server zabbix-agent apache2
+nano /etc/zabbix/zabbix_agentd.conf
+# Server=84.201.178.123
+# ServerActive=84.201.178.123
+# Hostname=zabbix-vm
+systemctl restart zabbix-agent
+
+# On zabbix-agent-vm
+ssh -i /home/victoria_luginina/.ssh/id_rsa ubuntu@89.169.190.116
+sudo apt-get update && sudo apt-get upgrade -y
+wget https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.4+ubuntu24.04_all.deb
+sudo dpkg -i zabbix-release_latest_7.4+ubuntu24.04_all.deb
+sudo apt-get update
+sudo apt-get install -y zabbix-agent
+nano /etc/zabbix/zabbix_agentd.conf
+# Server=84.201.178.123
+# ServerActive=84.201.178.123
+# Hostname=zabbix-agent-vm
+sudo systemctl restart zabbix-agent
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота 2](ссылка на скриншот 2)`
+![Название скриншота 2](ссылка на скриншот 2)
 
+![Название скриншота](ссылка на скриншот)
 
----
+![Название скриншота](ссылка на скриншот)
 
-### Задание 3
-
-`Приведите ответ в свободной форме........`
-
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
-
-```
-Поле для вставки кода...
-....
-....
-....
-....
-```
-
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
-
-### Задание 4
-
-`Приведите ответ в свободной форме........`
-
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
-
-```
-Поле для вставки кода...
-....
-....
-....
-....
-```
-
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
+![Название скриншота](ссылка на скриншот)
