@@ -94,10 +94,10 @@ nano /etc/zabbix/zabbix_agentd.conf
 sudo systemctl restart zabbix-agent
 ```
 
-![Название скриншота 2](ссылка на скриншот 2)
+![configuration.png](https://github.com/victorialugi/Zabbix_1/blob/main/configuration.png)
 
-![Название скриншота](ссылка на скриншот)
+![monitoring.png](https://github.com/victorialugi/Zabbix_1/blob/main/monitoring.png)
 
-![Название скриншота](ссылка на скриншот)
+![screenshot_log_1.png](https://github.com/victorialugi/Zabbix_1/blob/main/screenshot_log_1.png)
 
-![Название скриншота](ссылка на скриншот)
+![screenshot_log_2.png](https://github.com/victorialugi/Zabbix_1/blob/main/screenshot_log_2.png)
